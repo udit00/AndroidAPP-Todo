@@ -11,9 +11,10 @@ import com.example.todoit.data.Todo
 import com.example.todoit.data.TodoViewModel
 import com.example.todoit.ui.TodoAdapter
 import com.example.todoit.ui.TodoItemClicked
+import com.example.todoit.ui.base.BaseActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity(), TodoItemClicked {
+class MainActivity : BaseActivity(), TodoItemClicked {
     lateinit var mTodoViewModel: TodoViewModel
     lateinit var todoList: RecyclerView
 //    lateinit var todoDone: ProgressBar
@@ -28,23 +29,22 @@ class MainActivity : AppCompatActivity(), TodoItemClicked {
         val adapter = TodoAdapter(this)
         todoList.adapter = adapter
 
+
         mTodoViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(this.application)
         )[TodoViewModel::class.java]
-//        mTodoViewModel = ViewModelProvider(
-//            this,
-//            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-//        )[TodoViewModel::class.java]
-//        mTodoViewModel.read.observe(this@MainActivity, Observer { list ->
-//            list?.let {
-//                adapter.setData(it)
-//            }
-//        })
 
         addTodo.setOnClickListener {
-
+            successToast("This is a toast test please get away")
         }
+    }
+
+    private fun setObservers(){
+
+    }
+    private fun onClicks(){
+
     }
 
     override fun onItemClicked(todo: Todo) {
