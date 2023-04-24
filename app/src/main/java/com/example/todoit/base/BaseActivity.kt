@@ -1,4 +1,4 @@
-package com.example.todoit.ui.base
+package com.example.todoit.base
 
 import android.app.Activity
 import android.content.Context
