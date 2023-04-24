@@ -21,20 +21,11 @@ open class BaseActivity: AppCompatActivity() {
         mActivity = this@BaseActivity
     }
 
-    public fun successToast(msg: String) {
-        val view = layoutInflater.inflate(R.layout.toast, null)
-        view.rootView.background = ContextCompat.getDrawable(this, R.color.success)
-        val toastMessage = view.findViewById<TextView>(R.id.toast_msg)
-//        toastMessage.backgroundTintMode = ContextCompat.getDrawable(this,R.color.success)
-        toastMessage.background = ContextCompat.getDrawable(this, R.color.black)
-
-        Toast(mContext).apply {
-            setText(msg)
-            duration = Toast.LENGTH_LONG
-            setContentView(view)
-            show()
-        }
-
+    public fun successToast(message: String) {
+        val toast = Toast.makeText(mContext, message, Toast.LENGTH_LONG).show()
+    }
+    public fun errorToast(message: String) {
+        val toast = Toast.makeText(mContext, message, Toast.LENGTH_LONG).show()
     }
 
 

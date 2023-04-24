@@ -3,8 +3,9 @@ package com.example.todoit.ui.Home
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.todoit.R
+import com.example.todoit.base.BaseActivity
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
