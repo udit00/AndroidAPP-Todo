@@ -5,6 +5,8 @@ import android.os.Bundle
 import com.example.todoit.R
 import com.example.todoit.base.BaseActivity
 import com.example.todoit.databinding.ActivityLoginBinding
+import com.example.todoit.utils.logger
+import kotlin.math.log
 
 class LoginActivity : BaseActivity() {
 
@@ -20,22 +22,18 @@ class LoginActivity : BaseActivity() {
 
     private fun onClicks(){
         activityLoginBinding.signin.setOnClickListener {
-            activityLoginBinding.getUsername()?.let {
-                    errorToast(username)
+            if(activityLoginBinding.username.text.toString().isNullOrEmpty()) {
+                errorToast("Please enter Username.")
+                return@setOnClickListener
+            } else if(activityLoginBinding.password.text.toString().isNullOrEmpty()) {
+                errorToast("Please enter Password.")
+                return@setOnClickListener
+            } else {
+                attemptLogin(
+                    activityLoginBinding.username.text.toString().uppercase(),
+                    activityLoginBinding.password.text.toString().uppercase()
+                )
             }
-//            errorToast(activityLoginBinding.getPassword())
-//            if(activityLoginBinding.username.toString().isNullOrEmpty()) {
-//                errorToast("Please enter Username.")
-//                return@setOnClickListener
-//            } else if(activityLoginBinding.password.toString().isNullOrEmpty()) {
-//                errorToast("Please enter Password.")
-//                return@setOnClickListener
-//            } else {
-//                attemptLogin(
-//                    activityLoginBinding.username.toString(),
-//                    activityLoginBinding.password.toString()
-//                )
-//            }
         }
     }
 
