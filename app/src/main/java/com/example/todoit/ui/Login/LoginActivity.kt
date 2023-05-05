@@ -6,8 +6,10 @@ import com.example.todoit.R
 import com.example.todoit.base.BaseActivity
 import com.example.todoit.databinding.ActivityLoginBinding
 import com.example.todoit.utils.logger
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.log
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity() {
 
     private var username: String = ""
