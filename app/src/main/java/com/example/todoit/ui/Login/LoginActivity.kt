@@ -2,6 +2,7 @@ package com.example.todoit.ui.Login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.example.todoit.R
 import com.example.todoit.base.BaseActivity
 import com.example.todoit.databinding.ActivityLoginBinding
@@ -14,6 +15,7 @@ class LoginActivity : BaseActivity() {
 
     private var username: String = ""
     private var password: String = ""
+    private val viewModel: LoginViewModel by viewModels()
     private lateinit var activityLoginBinding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,10 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun attemptLogin(username: String, password: String){
-        successToast("Login Successful.")
+        viewModel.attemptLogin(
+            this@LoginActivity,
+            username,
+            password
+        )
     }
 }
