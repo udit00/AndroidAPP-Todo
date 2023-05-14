@@ -1,4 +1,4 @@
-package com.example.todoit.base
+package com.example.todoit.common.base
 
 import androidx.lifecycle.MutableLiveData
 import com.example.todoit.API

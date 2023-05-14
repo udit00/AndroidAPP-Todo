@@ -1,9 +1,8 @@
-package com.example.todoit.ui.Home
+package com.example.todoit.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.todoit.R
-import com.example.todoit.base.BaseActivity
+import com.example.todoit.common.base.BaseActivity
 
 class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

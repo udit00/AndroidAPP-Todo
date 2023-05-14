@@ -1,4 +1,4 @@
-package com.example.todoit.data
+package com.example.todoit.common.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

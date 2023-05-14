@@ -3,13 +3,10 @@ package com.example.todoit
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import com.example.todoit.base.BaseActivity
-import com.example.todoit.ui.Login.LoginActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
+import com.example.todoit.common.base.BaseActivity
+import com.example.todoit.ui.login.LoginActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.time.Duration
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

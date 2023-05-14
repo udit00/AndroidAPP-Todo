@@ -1,4 +1,4 @@
-package com.example.todoit.hilt
+package com.example.todoit.common.hilt
 
 import android.app.Application
 import android.os.Bundle

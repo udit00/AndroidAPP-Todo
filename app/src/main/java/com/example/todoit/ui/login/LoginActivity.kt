@@ -1,14 +1,13 @@
-package com.example.todoit.ui.Login
+package com.example.todoit.ui.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import androidx.activity.viewModels
-import com.example.todoit.R
-import com.example.todoit.base.BaseActivity
+import com.example.todoit.common.base.BaseActivity
+import com.example.todoit.common.environment.Environment
+import com.example.todoit.common.utils.toEditable
 import com.example.todoit.databinding.ActivityLoginBinding
-import com.example.todoit.utils.logger
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {
@@ -22,6 +21,14 @@ class LoginActivity : BaseActivity() {
         activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(activityLoginBinding.root)
         onClicks()
+        if(Environment.isDebugging) {
+            activityLoginBinding.username.text = toEditable(Environment.debugUserName)
+            activityLoginBinding.password.text = toEditable(Environment.debugPassword)
+            attemptLogin(
+                username = activityLoginBinding.username.text.toString(),
+                password = activityLoginBinding.password.text.toString()
+            )
+        }
     }
 
     private fun onClicks(){

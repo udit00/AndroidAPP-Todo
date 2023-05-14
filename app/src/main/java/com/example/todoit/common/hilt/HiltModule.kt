@@ -1,4 +1,4 @@
-package com.example.todoit.hilt
+package com.example.todoit.common.hilt
 
 import com.example.todoit.API
 import com.google.gson.Gson

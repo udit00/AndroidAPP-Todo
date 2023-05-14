@@ -1,4 +1,4 @@
-package com.example.todoit.data
+package com.example.todoit.common.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

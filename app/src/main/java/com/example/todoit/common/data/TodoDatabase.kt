@@ -1,4 +1,4 @@
-package com.example.todoit.data
+package com.example.todoit.common.data
 
 import android.content.Context
 import android.os.strictmode.InstanceCountViolation
@@ -15,7 +15,7 @@ abstract class TodoDatabase: RoomDatabase()  {
         @Volatile
         private var INSTANCE: TodoDatabase? = null
 
-        fun getDatabase(context: Context): TodoDatabase{
+        fun getDatabase(context: Context): TodoDatabase {
             val tempInstance = INSTANCE
 
             if(tempInstance!=null) return tempInstance

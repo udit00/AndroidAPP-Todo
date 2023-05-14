@@ -1,8 +1,8 @@
-package com.example.todoit.ui.Login
+package com.example.todoit.ui.login
 
 import android.app.Activity
 import androidx.lifecycle.viewModelScope
-import com.example.todoit.base.BaseViewModel
+import com.example.todoit.common.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
