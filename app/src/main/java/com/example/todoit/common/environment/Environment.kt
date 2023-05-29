@@ -2,8 +2,8 @@ package com.example.todoit.common.environment
 
 class Environment {
     companion object {
-        val isDebugging = true
-        val debugUserName = "test"
-        val debugPassword = "todo"
+        const val isDebugging = true
+        const val debugUserName = "test"
+        const val debugPassword = "todo"
     }
 }

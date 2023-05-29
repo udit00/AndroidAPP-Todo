@@ -6,11 +6,11 @@
     <data>
 
         <variable
-            name="username"
+            name="userNameVar"
             type="String" />
 
         <variable
-            name="password"
+            name="passWordVar"
             type="String" />
 
     </data>
@@ -43,8 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
-                android:text="@={username}"
                 />
+<!--                android:text="@={userNameVar}"-->
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -62,8 +62,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
-                android:text="@={password}"
                 />
+<!--                android:text="@={passWordVar}"-->
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

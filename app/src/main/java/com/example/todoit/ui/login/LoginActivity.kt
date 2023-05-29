@@ -5,6 +5,7 @@ import android.text.Editable
 import androidx.activity.viewModels
 import com.example.todoit.common.base.BaseActivity
 import com.example.todoit.common.environment.Environment
+import com.example.todoit.common.utils.logger
 import com.example.todoit.common.utils.toEditable
 import com.example.todoit.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,9 +19,11 @@ class LoginActivity : BaseActivity() {
     private lateinit var activityLoginBinding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mActivity = this
         activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(activityLoginBinding.root)
-        onClicks()
+        setOnClicks()
+        setObservers()
         if(Environment.isDebugging) {
             activityLoginBinding.username.text = toEditable(Environment.debugUserName)
             activityLoginBinding.password.text = toEditable(Environment.debugPassword)
@@ -31,7 +34,22 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private fun onClicks(){
+    private fun setObservers() {
+        viewModel.isError.observe(this) { errorMessage ->
+            if(errorMessage != null) {
+                errorToast(errorMessage)
+            }
+        }
+
+        viewModel.loginData.observe(this) { result ->
+            if (result != null) {
+                successToast(result.message)
+            }
+        }
+
+    }
+
+    private fun setOnClicks(){
         activityLoginBinding.signin.setOnClickListener {
             if(activityLoginBinding.username.text.toString().isNullOrEmpty()) {
                 errorToast("Please enter Username.")
