@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoit.R
 import com.example.todoit.common.base.BaseActivity
 import com.example.todoit.common.data.Todo
+import com.example.todoit.common.data.TodoType
 import com.example.todoit.databinding.ActivityHomeBinding
 
 class HomeActivity : BaseActivity() {
@@ -43,7 +44,13 @@ class HomeActivity : BaseActivity() {
             list.add(
                 Todo(
                     i,
-                    "item_${i}",
+                "item_${i}",
+                    "subTitle_${i}",
+                    TodoType(
+                        i+1,
+                        "Sports",
+                        "Test"
+                    ),
                     false
                 )
             )

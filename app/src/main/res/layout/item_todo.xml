@@ -15,23 +15,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ProgressBar
-            android:id="@+id/haveToBeDone"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--        <ProgressBar-->
+        <!--            android:id="@+id/haveToBeDone"-->
+        <!--            style="?android:attr/progressBarStyle"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <TextView
             android:id="@+id/todo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="@{todoItem.todo}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{todoItem.todoTitle}"
             app:layout_constraintEnd_toStartOf="@+id/haveToBeDone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/todoSubTitle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@{todoItem.todoSubTitle}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/haveToBeDone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todo" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/haveToBeDone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

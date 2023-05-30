@@ -9,6 +9,13 @@ import java.lang.StringBuilder
 data class Todo(
     @PrimaryKey
     val id: Int,
-    val todo: String,
+    val todoTitle: String,
+    val todoSubTitle: String,
+    val todoType: TodoType,
     val isDone: Boolean
+)
+data class TodoType (
+    val typeId: Int,
+    val typeTitle: String,
+    val typeDescription: String
 )
