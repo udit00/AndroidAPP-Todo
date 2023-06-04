@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.example.todoit.common.base.BaseRepository
 import com.example.todoit.common.data.Todo
 import com.example.todoit.common.utils.isResponseOk
-import com.example.todoit.ui.login.LoginModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import javax.inject.Inject

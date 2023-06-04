@@ -48,9 +48,7 @@ class LoginActivity : BaseActivity() {
 
         viewModel.loginData.observe(this) { result ->
             if (result != null) {
-                lifecycleScope.launch (Dispatchers.IO){
-                    saveUserToStorage(result)
-                }
+                saveUserToStorage(result)
                 successToast(result.message)
                 goToHomePage()
             }

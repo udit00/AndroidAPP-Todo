@@ -1,22 +1,17 @@
 package com.example.todoit.ui.home
 
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toolbar
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todoit.R
 import com.example.todoit.common.base.BaseActivity
 import com.example.todoit.common.data.Todo
 import com.example.todoit.common.data.TodoStatus
+import com.example.todoit.common.utils.UTILS
 import com.example.todoit.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity() {
@@ -38,12 +33,11 @@ class HomeActivity : BaseActivity() {
         setUpObservers()
         setUpRecyclerView()
         getTodos()
-        getSavedUser()
     }
 
     private fun getTodos() {
         viewModel.callGetTodosApi(
-            "3"
+            UTILS.savedLoginModel.userid.toString()
         )
     }
 
@@ -68,10 +62,6 @@ class HomeActivity : BaseActivity() {
                 setUpRecyclerView()
 
             }
-        }
-        userLoginModelLiveData.observe(this) { loginModel ->
-            successToast("Done")
-            successToast(loginModel.message)
         }
     }
 

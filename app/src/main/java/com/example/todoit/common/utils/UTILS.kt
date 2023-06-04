@@ -4,8 +4,15 @@ import android.app.Activity
 import android.text.Editable
 import android.util.Log
 import com.example.todoit.common.environment.CommonResponse
+import com.example.todoit.ui.login.LoginModel
 import retrofit2.Response
 
+
+class UTILS {
+    companion object {
+        lateinit var savedLoginModel: LoginModel
+    }
+}
 fun logger(activity: Activity, msg: String){
     Log.d(activity.localClassName, msg)
 }

@@ -1,8 +1,12 @@
 package com.example.todoit.ui.login
 
-import com.google.gson.annotations.SerializedName
-
 data class LoginModel(
+    val fullname: String,
+    val ispremium: String,
     val message: String,
-    val status: Int
+    val status: Int,
+    val usercontact: String,
+    val userdp: Any,
+    val userid: Int,
+    val username: String
 )
