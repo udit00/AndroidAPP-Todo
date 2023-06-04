@@ -14,9 +14,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
+import javax.inject.Inject
 
 @AndroidEntryPoint
-open class BaseActivity: AppCompatActivity() {
+open class BaseActivity @Inject constructor(): AppCompatActivity() {
 
 
     lateinit var mContext: Context

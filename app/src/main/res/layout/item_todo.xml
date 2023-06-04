@@ -30,7 +30,7 @@
             android:id="@+id/todo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="@{todoItem.todoTitle}"
+            android:text="@{todoItem.todotitle}"
             app:layout_constraintEnd_toStartOf="@+id/haveToBeDone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
             android:id="@+id/todoSubTitle"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="@{todoItem.todoSubTitle}"
+            android:text="@{todoItem.tododescription}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/haveToBeDone"
             app:layout_constraintStart_toStartOf="parent"

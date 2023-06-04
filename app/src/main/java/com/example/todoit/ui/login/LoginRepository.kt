@@ -21,11 +21,12 @@ class LoginRepository @Inject constructor(): BaseRepository() {
     val loginResponse: LiveData<LoginModel> = loginData
 
 
-    suspend fun attemptLogin(activity: Activity, username: String, password: String) {
+    suspend fun attemptLogin(activity: Activity, username: String, password: String, appVersion: String) {
         try {
             val response: Response<CommonResponse> = api.userLogin(
                 userName = username,
-                passWord = password
+                passWord = password,
+                appVersion = appVersion
             )
             if (isResponseOk(response)) {
                 val gson = Gson()

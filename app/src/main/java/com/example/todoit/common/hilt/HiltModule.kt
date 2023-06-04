@@ -18,9 +18,9 @@ object HiltModule {
     @Singleton
     fun getApi(): API{
         return Retrofit.Builder()
-            .baseUrl("http://192.168.29.188:5000/todo/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(API::class.java)
+                .baseUrl("http://192.168.29.188:5000/todo/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(API::class.java)
     }
 }

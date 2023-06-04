@@ -4,8 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-open class BaseViewModel: ViewModel() {
+open class BaseViewModel @Inject constructor(): ViewModel() {
+
+    @Inject
+    lateinit var baseRepo: BaseRepository
+
     private val isErrorData: MutableLiveData<String> = MutableLiveData()
-    lateinit var isError: LiveData<String>
+    val isError: LiveData<String>
+    get() = baseRepo.isError
+
 }

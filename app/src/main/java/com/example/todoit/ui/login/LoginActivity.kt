@@ -76,9 +76,10 @@ class LoginActivity : BaseActivity() {
 
     private fun attemptLogin(username: String, password: String){
         viewModel.attemptLogin(
-            this@LoginActivity,
-            username,
-            password
+            activity = this@LoginActivity,
+            username = username,
+            password = password,
+            appVersion = Environment.appVersion
         )
     }
 }

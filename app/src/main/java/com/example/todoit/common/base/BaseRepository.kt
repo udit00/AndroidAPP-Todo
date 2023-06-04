@@ -11,7 +11,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 
-open class BaseRepository {
+open class BaseRepository @Inject constructor() {
     val ERR_PARSING_JSON = "Error While Parsing the JSON."
     val ERR_NETWORK = "Network error. Please try again."
     val ERR_API = "Error during communication with the server. Please try again after some time."
