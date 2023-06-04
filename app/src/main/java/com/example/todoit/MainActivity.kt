@@ -19,8 +19,8 @@ class MainActivity : BaseActivity() {
     }
     private suspend fun start(){
         delay(3000)
-//        openLogin()
-        openHomePage()
+        openLogin()
+//        openHomePage()
     }
 
 

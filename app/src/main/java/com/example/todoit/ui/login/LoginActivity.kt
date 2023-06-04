@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.todoit.common.base.BaseActivity
 import com.example.todoit.common.environment.Environment
 import com.example.todoit.common.utils.logger
@@ -11,6 +12,8 @@ import com.example.todoit.common.utils.toEditable
 import com.example.todoit.databinding.ActivityLoginBinding
 import com.example.todoit.ui.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {
@@ -45,6 +48,9 @@ class LoginActivity : BaseActivity() {
 
         viewModel.loginData.observe(this) { result ->
             if (result != null) {
+                lifecycleScope.launch (Dispatchers.IO){
+                    saveUserToStorage(result)
+                }
                 successToast(result.message)
                 goToHomePage()
             }

@@ -8,9 +8,22 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.DataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import com.example.todoit.R
 import com.example.todoit.common.environment.CommonResponse
+import com.example.todoit.ui.login.LoginModel
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
@@ -22,7 +35,10 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
 
     lateinit var mContext: Context
     lateinit var mActivity: Activity
-
+    companion object {
+        val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "User")
+    }
+    private val userPrefKey = stringPreferencesKey("User")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +52,28 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
         val toast = Toast.makeText(mContext, message, Toast.LENGTH_LONG).show()
     }
 
+    suspend fun saveUserToStorage(loginModel: LoginModel) {
+        val gson = Gson()
+        val jsonLoginModel: String? = gson.toJson(loginModel)
+        if(jsonLoginModel != null) {
+            this.dataStore.edit { storedUser ->
+                storedUser[userPrefKey] = jsonLoginModel
+            }
+        }
+    }
+
+    suspend fun getSavedUser(): LoginModel? {
+        val gson = Gson()
+        val pref = dataStore.data.first()
+        val savedUserJson = pref[userPrefKey]
+        if(savedUserJson != null) {
+            val loginModel = gson.fromJson(savedUserJson, LoginModel::class.java)
+            if(loginModel!=null) {
+                return loginModel
+            }
+        }
+        return null
+    }
 
 
 }
