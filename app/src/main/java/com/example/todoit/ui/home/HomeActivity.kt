@@ -38,13 +38,7 @@ class HomeActivity : BaseActivity() {
         setUpObservers()
         setUpRecyclerView()
         getTodos()
-        lifecycleScope.launch(Dispatchers.IO) {
-            val loginModel = getSavedUser()
-            if(loginModel!=null) {
-                successToast("Got Data")
-                successToast(loginModel.message)
-            }
-        }
+        getSavedUser()
     }
 
     private fun getTodos() {
@@ -74,6 +68,10 @@ class HomeActivity : BaseActivity() {
                 setUpRecyclerView()
 
             }
+        }
+        userLoginModelLiveData.observe(this) { loginModel ->
+            successToast("Done")
+            successToast(loginModel.message)
         }
     }
 

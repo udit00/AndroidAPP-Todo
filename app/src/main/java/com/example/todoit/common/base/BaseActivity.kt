@@ -14,6 +14,9 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import com.example.todoit.R
 import com.example.todoit.common.environment.CommonResponse
 import com.example.todoit.ui.login.LoginModel
@@ -24,6 +27,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
@@ -35,6 +39,9 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
 
     lateinit var mContext: Context
     lateinit var mActivity: Activity
+    private val userLoginModelMutData = MutableLiveData<LoginModel>()
+    val userLoginModelLiveData: LiveData<LoginModel>
+    get() = userLoginModelMutData
     companion object {
         val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "User")
     }
@@ -62,17 +69,18 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
         }
     }
 
-    suspend fun getSavedUser(): LoginModel? {
+    fun getSavedUser(){
         val gson = Gson()
-        val pref = dataStore.data.first()
-        val savedUserJson = pref[userPrefKey]
-        if(savedUserJson != null) {
-            val loginModel = gson.fromJson(savedUserJson, LoginModel::class.java)
-            if(loginModel!=null) {
-                return loginModel
+        lifecycleScope.launch {
+            val pref = dataStore.data.first()
+            val savedUserJson = pref[userPrefKey]
+            if(savedUserJson != null) {
+                val loginModel = gson.fromJson(savedUserJson, LoginModel::class.java)
+                if(loginModel!=null) {
+                    userLoginModelMutData.postValue(loginModel)
+                }
             }
         }
-        return null
     }
 
 
