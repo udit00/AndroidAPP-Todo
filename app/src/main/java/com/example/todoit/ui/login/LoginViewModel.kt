@@ -14,6 +14,10 @@ class LoginViewModel @Inject constructor(private val repo: LoginRepository) : Ba
     val loginData: LiveData<LoginModel>
     get() = repo.loginResponse
 
+    init {
+        isError = repo.isError
+    }
+
     fun attemptLogin(activity: Activity, username: String, password: String, appVersion: String) {
         viewModelScope.launch (Dispatchers.IO){
             repo.attemptLogin(

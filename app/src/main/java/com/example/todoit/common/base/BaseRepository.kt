@@ -1,6 +1,7 @@
 package com.example.todoit.common.base
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.todoit.API
 import com.example.todoit.common.environment.CommonResponse
@@ -15,7 +16,8 @@ open class BaseRepository @Inject constructor() {
     val ERR_PARSING_JSON = "Error While Parsing the JSON."
     val ERR_NETWORK = "Network error. Please try again."
     val ERR_API = "Error during communication with the server. Please try again after some time."
-    var isError= MutableLiveData<String>()
+    protected var isErrorData= MutableLiveData<String>()
+    val isError: LiveData<String> = isErrorData
     var isSuccess = MutableLiveData<String>()
     @Inject
     lateinit var api: API
@@ -30,10 +32,11 @@ open class BaseRepository @Inject constructor() {
             }
             catch (e: JSONException) {
 //                logger(e.toString())
-
+                isErrorData.postValue(e.message);
                 return "";
             }
         }
+        isErrorData.postValue(ERR_PARSING_JSON)
         return "";
     }
 

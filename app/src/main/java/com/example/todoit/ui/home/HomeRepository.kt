@@ -21,18 +21,20 @@ class HomeRepository @Inject constructor(): BaseRepository(){
         )
         if(isResponseOk(response)) {
             val gson = Gson()
-            var resultStr = getResult0(response)
+            val resultStr = getResult0(response)
             response.body()?.data?.let {
 
                 val todoResult = object : TypeToken<List<Todo?>?>() {}.type
                 val todoList: ArrayList<Todo> = gson.fromJson(resultStr, todoResult);
                 if(todoList.size > 0) {
                     todoListData.postValue(todoList)
+                } else {
+                    isErrorData.postValue("No Todo Available.")
                 }
 
             }
             if(response.body()?.data == null) {
-                isError.postValue(response.body()?.message)
+                isErrorData.postValue(response.body()?.message)
             }
         }
     }

@@ -7,12 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 open class BaseViewModel @Inject constructor(): ViewModel() {
+//    protected var isErrorData: MutableLiveData<String> = MutableLiveData()
 
-    @Inject
-    lateinit var baseRepo: BaseRepository
-
-    private val isErrorData: MutableLiveData<String> = MutableLiveData()
-    val isError: LiveData<String>
-    get() = baseRepo.isError
-
+    lateinit var isError: LiveData<String>
 }

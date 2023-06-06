@@ -8,5 +8,6 @@ data class LoginModel(
     val usercontact: String,
     val userdp: Any,
     val userid: Int,
-    val username: String
+    val username: String,
+    val password: String
 )

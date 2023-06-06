@@ -42,7 +42,7 @@ class LoginRepository @Inject constructor(): BaseRepository() {
 
                 }
                 if(response.body()?.data == null) {
-                    isError.postValue(response.body()?.message)
+                    isErrorData.postValue(response.body()?.message)
                 }
             }
         } catch (ex: SocketException) {
@@ -51,9 +51,9 @@ class LoginRepository @Inject constructor(): BaseRepository() {
                 activity = activity,
                 msg =  ex.message.toString()
             )
-            isError.postValue(ERR_NETWORK);
+            isErrorData.postValue(ERR_NETWORK);
         } catch (ex: Exception) {
-            isError.postValue(ex.message)
+            isErrorData.postValue(ex.message)
         }
     }
 }

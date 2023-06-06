@@ -16,8 +16,12 @@ import com.example.todoit.ui.login.LoginModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.log
 
 @AndroidEntryPoint
 open class BaseActivity @Inject constructor(): AppCompatActivity() {
@@ -56,19 +60,21 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
         }
     }
 
-//    fun getSavedUser(){
-//        val gson = Gson()
-//        lifecycleScope.launch {
-//            val pref = dataStore.data.first()
-//            val savedUserJson = pref[userPrefKey]
-//            if(savedUserJson != null) {
-//                val loginModel = gson.fromJson(savedUserJson, LoginModel::class.java)
-//                if(loginModel!=null) {
-//                    userLoginModelMutData.postValue(loginModel)
-//                }
-//            }
-//        }
-//    }
+    suspend fun getSavedUser(): LoginModel?{
+        val gson = Gson()
+        var savedUserJson: String?
+        var loginModel: LoginModel? = null
+
+        val pref =  dataStore.data.first()
+        savedUserJson = pref[userPrefKey]
+        if(savedUserJson != null) {
+            loginModel = gson.fromJson(savedUserJson, LoginModel::class.java)
+            if(loginModel!=null) {
+                return loginModel
+            }
+        }
+        return null
+    }
 
 
 }
