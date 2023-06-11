@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.example.todoit.common.base.BaseActivity
+import com.example.todoit.common.environment.Environment
 import com.example.todoit.ui.home.HomeActivity
 import com.example.todoit.ui.login.LoginActivity
 import kotlinx.coroutines.delay
@@ -18,7 +19,9 @@ class MainActivity : BaseActivity() {
         }
     }
     private suspend fun start(){
-        delay(3000)
+        if(!Environment.isDebugging) {
+            delay(3000)
+        }
         openLogin()
 //        openHomePage()
     }
