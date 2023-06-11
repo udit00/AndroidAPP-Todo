@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
 import androidx.activity.viewModels
 import androidx.appcompat.widget.DrawableUtils
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
@@ -16,6 +17,7 @@ import com.example.todoit.R
 import com.example.todoit.common.base.BaseActivity
 import com.example.todoit.common.onrowclick.OnRowClickListener
 import com.example.todoit.common.utils.UTILS
+import com.example.todoit.common.utils.getTodoColorsData
 import com.example.todoit.databinding.ActivityAddTodoBinding
 import com.example.todoit.ui.addtodo.anim.startAnimation
 import com.example.todoit.ui.addtodo.models.ColorsModel
@@ -65,11 +67,12 @@ class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener<
     }
 
     private fun showPopUpMenu(view: View, menuList: ArrayList<TodoTypeModel>) {
-            popupMenu = PopupMenu(this, view)
-            for(i in 0 until menuList.size) {
-                popupMenu.menu.add(1, i, i, menuList.elementAt(i).type)
-            }
-            popupMenu.menu.add(1, menuList.size, menuList.size, "Add More")
+        popupMenu = PopupMenu(this, view)
+        for(i in 0 until menuList.size) {
+            popupMenu.menu.add(1, i, i, menuList.elementAt(i).type)
+        }
+
+//            popupMenu.menu.add(1, menuList.size, menuList.size, "Add More")
             popupMenu.show()
 
     }
@@ -89,6 +92,10 @@ class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener<
     }
 
     private fun initUi() {
+        setSupportActionBar(activityBinding.toolBar as Toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = "Todo"
         rv = activityBinding.rvColor
         dataList = getTodoColorsData()
     }
@@ -97,19 +104,38 @@ class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener<
         activityBinding.inputType.setOnClickListener {
             showPopUpMenu(it, popUpMenuList)
         }
+        activityBinding.btnSubmit.setOnClickListener {
+            if(activityBinding.inputTitle.text.isNullOrEmpty()) {
+                errorToast("Please enter title.")
+                return@setOnClickListener
+            } else if(activityBinding.inputDescription.text.isNullOrEmpty()) {
+                errorToast("Please enter description, that gives you a hint of the TODO.")
+                return@setOnClickListener
+            } else if(activityBinding.inputRemDate.text.isNullOrEmpty()) {
+//                errorToast("Please select a date for the reminder")
+            } else if(activityBinding.inputType.text.isNullOrEmpty()) {
+                errorToast("Please select a TODO type.")
+                return@setOnClickListener
+            } else if(activityBinding.inputMoreDetails.text.isNullOrEmpty()) {
+//                errorToast("Please enter more detail about the TODO.")
+//                return@setOnClickListener
+            }
+            saveTodo()
+        }
     }
 
-    private fun getTodoColorsData(): ArrayList<ColorsModel>  {
-        val colorList: ArrayList<ColorsModel> = ArrayList()
-        colorList.add(ColorsModel("#FA003A", "RED"))
-        colorList.add(ColorsModel("#0457B1", "BLUE"))
-        colorList.add(ColorsModel("#43FA00", "GREEN"))
-        colorList.add(ColorsModel("#FF6F00", "ORANGE"))
-        colorList.add(ColorsModel("#555555", "GRAY"))
-        colorList.add(ColorsModel("#FF000000", "BLACK"))
-        return colorList
-
+    private fun saveTodo() {
+        viewModel.addTodo(
+            userId = UTILS.savedLoginModel.userid.toString(),
+            title = activityBinding.inputTitle.text.toString(),
+            description = activityBinding.inputDescription.text.toString(),
+            typeId = UTILS.savedLoginModel.userid.toString(),
+            reminderDate = "1212",
+            selectedColor = "BLACK"
+        )
     }
+
+
 
     private fun setUpRecyclerView() {
         if(rvAdapter == null) {
@@ -127,9 +153,9 @@ class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener<
             interpolator = AccelerateDecelerateInterpolator()
         }
 //        activityBinding.colorExplodeAnim.setBackgroundColor(Color.parseColor(data.colorHexa))
-        activityBinding.colorExplodeAnim.backgroundTintList = ColorStateList.valueOf(Color.parseColor(data.colorHexa))
+        activityBinding.colorExplodeAnim.backgroundTintList = ColorStateList.valueOf(Color.parseColor(data.animationColorHexa))
         activityBinding.colorExplodeAnim.startAnimation(animation) {
-            activityBinding.addTodoParentLayout.setBackgroundColor(Color.parseColor(data.colorHexa))
+            activityBinding.addTodoParentLayout.setBackgroundColor(Color.parseColor(data.animationColorHexa))
         }
     }
 }

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Toolbar android:id="@+id/toolbar"
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     app:theme="@style/Toolbar"
     app:popupTheme="@style/Toolbar_Popup"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    />

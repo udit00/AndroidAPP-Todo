@@ -3,8 +3,8 @@ package com.example.todoit.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.Toolbar
 import androidx.activity.viewModels
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoit.common.base.BaseActivity
@@ -29,7 +29,7 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         activityBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
-        setActionBar(activityBinding.toolBar as Toolbar)
+        setSupportActionBar(activityBinding.toolBar as Toolbar)
         supportActionBar?.title = "Todo"
         initView()
         setUpObservers()
