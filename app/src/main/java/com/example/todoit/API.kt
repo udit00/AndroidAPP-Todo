@@ -23,4 +23,28 @@ interface API {
         @Query("prmuserid") userId: String
     ): Response<CommonResponse>
 
+    @FormUrlEncoded
+    @POST("addTodo")
+    suspend fun addTodo(
+        @Field("prmuserid") userId: String,
+        @Field("prmtitle") title: String,
+        @Field("prmdescription") description: String,
+        @Field("prmtypeid") todoTypeId: String,
+        @Field("prmremdt") reminderDate: String,
+        @Field("prmcolor") todoColor: String
+    ): Response<CommonResponse>
+
+    @GET("getTodoTypes")
+    suspend fun getTodoTypes(
+        @Query("prmuserid") userId: String
+    ): Response<CommonResponse>
+
+
+    @FormUrlEncoded
+    @POST("addTodoType")
+    suspend fun addTodoType(
+        @Field("prmuserid") userId: String,
+        @Field("prmtodotype") todoTypeName: String,
+    ): Response<CommonResponse>
+
 }

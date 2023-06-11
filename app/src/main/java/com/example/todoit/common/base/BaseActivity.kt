@@ -41,10 +41,10 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
     }
 
     fun successToast(message: String) {
-        val toast = Toast.makeText(mContext, message, Toast.LENGTH_LONG).show()
+        val toast = Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
     }
     fun errorToast(message: String) {
-        val toast = Toast.makeText(mContext, message, Toast.LENGTH_LONG).show()
+        val toast = Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
     }
 
     fun saveUserToStorage(loginModel: LoginModel) {

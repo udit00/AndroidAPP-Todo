@@ -1,5 +1,6 @@
 package com.example.todoit.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toolbar
@@ -11,6 +12,7 @@ import com.example.todoit.common.data.Todo
 import com.example.todoit.common.data.TodoStatus
 import com.example.todoit.common.utils.UTILS
 import com.example.todoit.databinding.ActivityHomeBinding
+import com.example.todoit.ui.addtodo.AddTodoActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,7 +34,15 @@ class HomeActivity : BaseActivity() {
         initView()
         setUpObservers()
         setUpRecyclerView()
+        setClickListeners()
         getTodos()
+    }
+
+    private fun setClickListeners() {
+        activityBinding.addTodo.setOnClickListener {
+            val intent = Intent(this@HomeActivity, AddTodoActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getTodos() {
@@ -63,6 +73,7 @@ class HomeActivity : BaseActivity() {
 
             }
         }
+
     }
 
     private fun setUpRecyclerView() {
