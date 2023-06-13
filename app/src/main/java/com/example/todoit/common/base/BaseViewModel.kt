@@ -10,4 +10,5 @@ open class BaseViewModel @Inject constructor(): ViewModel() {
 //    protected var isErrorData: MutableLiveData<String> = MutableLiveData()
 
     lateinit var isError: LiveData<String>
+    lateinit var isLoading: LiveData<Boolean>
 }

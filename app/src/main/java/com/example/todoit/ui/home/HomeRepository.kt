@@ -15,7 +15,9 @@ class HomeRepository @Inject constructor(): BaseRepository(){
     val todoList: LiveData<ArrayList<Todo>>
     get() = todoListData
 
+
     suspend fun callGetTodosApi(userId: String) {
+        isLoadingMutDat.postValue(true)
         val response =api.getTodos(
             userId = userId
         )
@@ -37,5 +39,6 @@ class HomeRepository @Inject constructor(): BaseRepository(){
                 isErrorData.postValue(response.body()?.message)
             }
         }
+        isLoadingMutDat.postValue(false)
     }
 }

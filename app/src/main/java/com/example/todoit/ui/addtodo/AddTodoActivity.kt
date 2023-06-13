@@ -1,8 +1,12 @@
 package com.example.todoit.ui.addtodo
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.view.MenuItem
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AnimationUtils
@@ -10,6 +14,7 @@ import android.widget.PopupMenu
 import androidx.activity.viewModels
 import androidx.appcompat.widget.DrawableUtils
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
@@ -54,7 +59,14 @@ class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener<
     private fun setObservers() {
         viewModel.addTodoLiveData.observe(this) { result ->
             if(result.status == 1) {
-                successToast(result.message)
+//                successToast(result.message)
+                AlertDialog.Builder(this)
+                    .setTitle("Success!")
+                    .setMessage("Todo was created.")
+                    .setPositiveButton("Okay") { _, _ ->
+                        finish()
+                    }
+                    .show()
             } else {
                 errorToast(result.message)
             }
@@ -64,12 +76,20 @@ class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener<
                 popUpMenuList.addAll(result)
             }
         }
+
     }
 
     private fun showPopUpMenu(view: View, menuList: ArrayList<TodoTypeModel>) {
         popupMenu = PopupMenu(this, view)
         for(i in 0 until menuList.size) {
             popupMenu.menu.add(1, i, i, menuList.elementAt(i).type)
+        }
+        popupMenu.setOnMenuItemClickListener { item ->
+            item?.itemId?.let { id ->
+                val todoType: TodoTypeModel = menuList[id]
+                activityBinding.inputType.text = Editable.Factory.getInstance().newEditable(todoType.type)
+            }
+            true
         }
 
 //            popupMenu.menu.add(1, menuList.size, menuList.size, "Add More")
@@ -130,7 +150,7 @@ class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener<
             title = activityBinding.inputTitle.text.toString(),
             description = activityBinding.inputDescription.text.toString(),
             typeId = UTILS.savedLoginModel.userid.toString(),
-            reminderDate = "1212",
+            reminderDate = "2023-08-05",
             selectedColor = "BLACK"
         )
     }

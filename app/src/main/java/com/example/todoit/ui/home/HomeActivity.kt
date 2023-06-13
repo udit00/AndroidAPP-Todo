@@ -35,7 +35,12 @@ class HomeActivity : BaseActivity() {
         setUpObservers()
         setUpRecyclerView()
         setClickListeners()
-        getTodos()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activityBinding.swipeRefreshLayout.isRefreshing = true
+        refreshData()
     }
 
     private fun setClickListeners() {
@@ -58,11 +63,28 @@ class HomeActivity : BaseActivity() {
             add(TodoStatus('W',"Working"))
             add(TodoStatus('C',"Completed"))
         }
+        activityBinding.swipeRefreshLayout.setOnRefreshListener {
+            refreshData()
+        }
 
 //        dataList = fakeData()
     }
 
+    private fun refreshData() {
+        dataList.clear()
+        setUpRecyclerView()
+        getTodos()
+        activityBinding.swipeRefreshLayout.isRefreshing = false
+    }
+
     private fun setUpObservers() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            if(isLoading) {
+
+            } else {
+
+            }
+        }
         viewModel.isError.observe(this) { error ->
             errorToast(error)
         }

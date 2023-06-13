@@ -15,9 +15,9 @@ class HomeViewModel @Inject constructor(private val repo: HomeRepository): BaseV
 
     val todoList: LiveData<ArrayList<Todo>>
     get() = repo.todoList
-
     init {
         isError = repo.isError
+        isLoading = repo.isLoadingLiveData
     }
     fun callGetTodosApi(userId: String) {
         viewModelScope.launch (Dispatchers.IO){

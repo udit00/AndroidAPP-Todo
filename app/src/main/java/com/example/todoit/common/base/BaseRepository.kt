@@ -19,6 +19,8 @@ open class BaseRepository @Inject constructor() {
     protected var isErrorData= MutableLiveData<String>()
     val isError: LiveData<String> = isErrorData
     var isSuccess = MutableLiveData<String>()
+    protected var isLoadingMutDat = MutableLiveData<Boolean>()
+    val isLoadingLiveData = isLoadingMutDat
     @Inject
     lateinit var api: API
 
