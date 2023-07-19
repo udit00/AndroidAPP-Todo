@@ -21,7 +21,7 @@ import com.google.android.material.imageview.ShapeableImageView
 class ColorAdapter(
     private val context: Context,
     private val rvList: ArrayList<ColorsModel>,
-    private val onRowClickListener: OnRowClickListener<ColorsModel>): RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
+    private val onRowClickListener: OnRowClickListener): RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
     class ColorViewHolder(private val itemBinding: ItemTodoColorBinding): RecyclerView.ViewHolder(itemBinding.root) {
         var todoColor: ShapeableImageView = itemBinding.todoColor
         fun bind(colorsModel: ColorsModel) {

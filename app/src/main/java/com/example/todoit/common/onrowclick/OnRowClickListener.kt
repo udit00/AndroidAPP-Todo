@@ -1,6 +1,6 @@
 package com.example.todoit.common.onrowclick
 
-interface OnRowClickListener<T> {
-    fun onRowClick(clickedOn: String, data: T)
-    fun onRowLongClick(clickedOn: String, data: T) {}
+interface OnRowClickListener {
+    fun onRowClick(clickedOn: String, data: Any)
+    fun onRowLongClick(clickedOn: String, data: Any) {}
 }

@@ -1,20 +1,16 @@
 package com.example.todoit.ui.addtodo
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
-import android.view.MenuItem
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
 import androidx.activity.viewModels
-import androidx.appcompat.widget.DrawableUtils
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
@@ -31,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener<ColorsModel> {
+class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener {
 
     private val viewModel: AddTodoViewModel by viewModels()
     private lateinit var rv: RecyclerView
@@ -167,15 +163,16 @@ class AddTodoActivity @Inject constructor(): BaseActivity(), OnRowClickListener<
         rv.adapter = rvAdapter
     }
 
-    override fun onRowClick(clickedOn: String, data: ColorsModel) {
+    override fun onRowClick(clickedOn: String, data: Any) {
+        val dataClicked = data as ColorsModel
         val animation = AnimationUtils.loadAnimation(this, R.anim.color_explosion_anim).apply {
             duration = 3000
             interpolator = AccelerateDecelerateInterpolator()
         }
 //        activityBinding.colorExplodeAnim.setBackgroundColor(Color.parseColor(data.colorHexa))
-        activityBinding.colorExplodeAnim.backgroundTintList = ColorStateList.valueOf(Color.parseColor(data.animationColorHexa))
+        activityBinding.colorExplodeAnim.backgroundTintList = ColorStateList.valueOf(Color.parseColor(dataClicked.animationColorHexa))
         activityBinding.colorExplodeAnim.startAnimation(animation) {
-            activityBinding.addTodoParentLayout.setBackgroundColor(Color.parseColor(data.animationColorHexa))
+            activityBinding.addTodoParentLayout.setBackgroundColor(Color.parseColor(dataClicked.animationColorHexa))
         }
     }
 }
